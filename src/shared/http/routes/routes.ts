@@ -3,6 +3,9 @@ import { Router } from 'express'
 //instanciando rotas do express
 const router = Router()
 
+//importação dos arquivos de rotas
+import userRouter from '@modules/User/routes/user.routes'
+
 //Criação de rota padrão para o projeto
 router.get('/', (req, res) => {
 
@@ -17,6 +20,9 @@ router.get('/', (req, res) => {
         version: '1.0.0'
     })
 })
+
+//utilização das rotas do modulos
+router.use('/user', userRouter)
 
 export default router
 

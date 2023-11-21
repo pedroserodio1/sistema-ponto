@@ -1,3 +1,4 @@
+
 import 'reflect-metadata'
 import express, {NextFunction, Request, Response } from 'express'
 import 'express-async-errors'
@@ -43,7 +44,7 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     })
 })
 
-
+/* eslint-disable no-console */
 //iniciando servidor
 app.listen(process.env.NUMBER_PORT, () => {
     console.log('------------------------------')
