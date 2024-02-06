@@ -5,6 +5,7 @@ const router = Router()
 
 //importação dos arquivos de rotas
 import userRouter from '@modules/User/routes/user.routes'
+import clockRouter from '@modules/Clock/routes/clock.routes'
 
 //Criação de rota padrão para o projeto
 router.get('/', (req, res) => {
@@ -23,6 +24,8 @@ router.get('/', (req, res) => {
 
 //utilização das rotas do modulos
 router.use('/user', userRouter)
+router.use('/clock', clockRouter)
+router.use('/employee', employeeRoute)
 
 export default router
 

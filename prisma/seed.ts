@@ -4,7 +4,6 @@ import { hash } from "bcryptjs";
 const prisma = new PrismaClient()
 
 async function main(){
-
     const hashedPassword = await hash('12345', 8)
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const mainUser = await prisma.user.upsert({

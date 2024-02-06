@@ -13,9 +13,6 @@ export class UserController {
 
         const data = req.body
 
-        data.user_create = req.user.id
-        data.user_update = req.user.id
-        
         const user = await createUser.execute(data)
 
         return res.status(202).json(user)
@@ -36,7 +33,6 @@ export class UserController {
 
     public async index(req: Request, res: Response): Promise<Response> {
         const listUsers = new ListUsersService()
-
 
         const users = await listUsers.execute()
 

@@ -1,0 +1,6 @@
+-- AlterTable
+ALTER TABLE "Clock" ALTER COLUMN "clock_time" SET DEFAULT NOW(),
+ALTER COLUMN "clock_time" SET DATA TYPE TIMESTAMPTZ;
+
+-- AlterTable
+ALTER TABLE "User" ALTER COLUMN "updated_at" DROP DEFAULT;

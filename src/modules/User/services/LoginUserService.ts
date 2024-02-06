@@ -1,5 +1,7 @@
 
 import {User} from "@prisma/client"
+import { prisma } from "@database/PrismaClient";
+
 import { AppError } from "@shared/AppError/AppError";
 import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
@@ -34,7 +36,16 @@ export class LoginUserService{
             throw new AppError('Usuario ou senha incorretos', 401)
         }
 
-        const token = sign({}, authConfig.jwt.secret, {
+        const nivelEmployee = await  prisma.employee.findFirst({
+            where: {
+                 id: user.employee_id
+            },
+            select: {
+                nivel: true
+            }
+        })
+
+        const token = sign({nivel: nivelEmployee?.nivel}, authConfig.jwt.secret, {
             subject: user.id,
             expiresIn: authConfig.jwt.expiresIn,
         });

@@ -11,7 +11,8 @@ userRouter.post(
     celebrate({
         [Segments.BODY]: {
             username: Joi.string().required(),
-            password: Joi.string().required()
+            password: Joi.string().required(),
+            employee_id: Joi.string().required(),
         }
     }),
     isAuthenticate,

@@ -7,18 +7,36 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Employee {
+  id          String   @id @default(uuid())
+  name        String
+  surname     String
+  birthday    DateTime @db.Date
+  function    String
+  nivel       Int
+  address     Json
+  numberphone String
+  cpf         String   @unique
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  User        User?
+}
+
 model User {
-  id         String   @id @default(uuid())
-  username   String   @unique
-  password   String
-  created_at DateTime @default(now())
-  updated_at DateTime @default(now()) @updatedAt
-  Clock      Clock[]
+  id          String   @id @default(uuid())
+  username    String   @unique
+  password    String
+  employee_id String   @unique
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  Employee    Employee @relation(fields: [employee_id], references: [id], onDelete: Cascade)
+  Clock       Clock[]
 }
 
 model Clock {
   id         String   @id @default(uuid())
-  clock_time DateTime @default(now())
+  clock_date DateTime @default(now()) @db.Date
+  clock_time DateTime @default(now()) @db.Time()
   user_id    String
   User       User     @relation(fields: [user_id], references: [id])
 }

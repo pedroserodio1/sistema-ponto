@@ -23,9 +23,12 @@ export default function isAuthenticate(
         const decodedToken = verify(token, authConfig.jwt.secret);
 
         const { sub } = decodedToken as { sub: string };
+        const { nivel } = decodedToken as { nivel: string };
+    
 
         req.user = {
             id: sub,
+            nivel: nivel
         };
 
         return next();
