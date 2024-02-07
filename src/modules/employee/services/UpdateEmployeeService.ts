@@ -19,20 +19,22 @@ interface IRequest {
         district: string,
         complement?: string
         cep: string,
+        state: string
     };
     numberphone?: string;
     cpf?: string;
+    email?: string;
 
 }
 
 export class UpdateEmployeeService{
-    public async execute(id: string, data: IRequest, nivelLogin: string): Promise<Employee>{
+    public async execute(id: string, data: IRequest, nivelLogin: string, company_id: string): Promise<Employee>{
 
         verifyNivel(nivelLogin, "3")
         
         const employeeRepository = new EmployeeRepository()
 
-        const employeeExist = await employeeRepository.findById(id)
+        const employeeExist = await employeeRepository.findById(id, company_id)
 
 
 

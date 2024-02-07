@@ -17,14 +17,17 @@ interface IRequest {
         district: string,
         complement?: string
         cep: string,
+        state: string
     };
     numberphone: string;
     cpf: string;
+    email: string;
+    company_id: string
 
 }
 
 export class CreateEmployeeService {
-    public async execute(data: IRequest, nivelLogin: string): Promise<Employee>{
+    public async execute(data: IRequest, nivelLogin: string, company_id: string): Promise<Employee>{
 
         verifyNivel(nivelLogin, "3")
 
@@ -36,8 +39,10 @@ export class CreateEmployeeService {
         if(cpfExists !== null){
             throw new AppError('Ja existe um funcionario com esse cpf')
         }
-
-
+        
+        if(!data.company_id){
+            data.company_id = company_id
+        }
 
         const user = await prisma.employee.create({
             data

@@ -1,21 +1,21 @@
 import { prisma } from "@database/PrismaClient";
-import { UserRepository } from "../repositories/UserRepository";
+import { CompanyRepository } from "../repositories/CompanyRepository";
 import { AppError } from "@shared/AppError/AppError";
 import verifyNivel from "@shared/VerifyNivel/VerifyNivel";
 
-export class DeleteUserService{
+export class DeleteCompanyService{
     public async execute(id: string, nivelLogin: string): Promise<void> {
 
         verifyNivel(nivelLogin, "3")
-        const userRepository = new UserRepository()
+        const companyRepository = new CompanyRepository()
 
-        const userExists = await userRepository.findById(id)
+        const companyExists = await companyRepository.findById(id)
 
-        if(!userExists){
-            throw new AppError('Usuario não encontrado', 404)
+        if(!companyExists){
+            throw new AppError('Empresa não encontrada', 404)
         }
 
-        await prisma.user.delete({
+        await prisma.company.delete({
             where: {
                 id
             }

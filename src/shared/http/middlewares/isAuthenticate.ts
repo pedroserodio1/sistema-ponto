@@ -24,11 +24,13 @@ export default function isAuthenticate(
 
         const { sub } = decodedToken as { sub: string };
         const { nivel } = decodedToken as { nivel: string };
+        const { company_id } = decodedToken as { company_id: string };
     
 
         req.user = {
             id: sub,
-            nivel: nivel
+            nivel: nivel,
+            company_id: company_id
         };
 
         return next();

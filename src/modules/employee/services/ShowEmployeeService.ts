@@ -4,12 +4,12 @@ import { EmployeeRepository } from "../repositories/EmployeeRepository";
 import verifyNivel from "@shared/VerifyNivel/VerifyNivel";
 
 export class ShowEmployeeService{
-    public async execute(id: string, nivelLogin: string): Promise<Employee>{
+    public async execute(id: string, nivelLogin: string, company_id: string): Promise<Employee>{
 
         verifyNivel(nivelLogin, "3")
         const employeeRepository = new EmployeeRepository()
 
-        const employee = await employeeRepository.findById(id)
+        const employee = await employeeRepository.findById(id, company_id)
 
         if(!employee){
             throw new AppError('Usuario não encontrado', 404)

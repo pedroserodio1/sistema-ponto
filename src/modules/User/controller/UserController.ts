@@ -13,7 +13,9 @@ export class UserController {
 
         const data = req.body
 
-        const user = await createUser.execute(data)
+        const nivelLogin = req.user.nivel
+
+        const user = await createUser.execute(data, nivelLogin)
 
         return res.status(202).json(user)
 
@@ -24,8 +26,9 @@ export class UserController {
 
         const {id} = req.params
         const data = req.body
+        const nivelLogin = req.user.nivel
 
-        const user = await updateUser.execute(id, data)
+        const user = await updateUser.execute(id, data, nivelLogin)
         
         return res.status(204).json(user)
 
@@ -33,8 +36,9 @@ export class UserController {
 
     public async index(req: Request, res: Response): Promise<Response> {
         const listUsers = new ListUsersService()
+        const nivelLogin = req.user.nivel
 
-        const users = await listUsers.execute()
+        const users = await listUsers.execute(nivelLogin)
 
         return res.status(200).json(users)
     }
@@ -43,8 +47,9 @@ export class UserController {
         const showUser = new ShowUsersService()
 
         const { id } = req.params
+        const nivelLogin = req.user.nivel
 
-        const user = await showUser.execute(id)
+        const user = await showUser.execute(id, nivelLogin)
 
         return res.status(200).json(user)
     }
@@ -54,8 +59,9 @@ export class UserController {
 
         const {id} = req.params
         
+        const nivelLogin = req.user.nivel
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const user = await deleteUser.execute(id)
+        const user = await deleteUser.execute(id, nivelLogin)
 
         return res.status(204).json({})
     }

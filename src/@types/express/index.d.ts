@@ -3,6 +3,7 @@ declare namespace Express {
         user: {
             id: string;
             nivel: string;
+            company_id: string;
         };
     }
 }

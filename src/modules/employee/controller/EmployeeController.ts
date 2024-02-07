@@ -13,8 +13,9 @@ export class EmployeeController {
         const data = req.body
 
         const nivelLogin = req.user.nivel
+        const company_id = req.user.company_id
         
-        const employee = await createEmployee.execute(data, nivelLogin)
+        const employee = await createEmployee.execute(data, nivelLogin, company_id)
 
         return res.status(202).json(employee)
 
@@ -27,8 +28,9 @@ export class EmployeeController {
         const data = req.body
 
         const nivelLogin = req.user.nivel
+        const company_id = req.user.company_id
 
-        const employee = await updateEmployee.execute(id, data, nivelLogin)
+        const employee = await updateEmployee.execute(id, data, nivelLogin, company_id)
         
         return res.status(204).json(employee)
 
@@ -38,8 +40,9 @@ export class EmployeeController {
         const listEmployee = new ListEmployeesService()
 
         const nivelLogin = req.user.nivel
+        const company_id = req.user.company_id
 
-        const employee = await listEmployee.execute(nivelLogin)
+        const employee = await listEmployee.execute(nivelLogin, company_id)
 
         return res.status(200).json(employee)
     }
@@ -50,9 +53,9 @@ export class EmployeeController {
         const { id } = req.params
 
         const nivelLogin = req.user.nivel
+        const company_id = req.user.company_id
 
-
-        const user = await showEmployee.execute(id, nivelLogin)
+        const user = await showEmployee.execute(id, nivelLogin, company_id)
 
         return res.status(200).json(user)
     }

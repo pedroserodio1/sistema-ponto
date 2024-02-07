@@ -21,10 +21,13 @@ employeeRoute.post(
         city: Joi.string().required(),
         district: Joi.string().required(),
         complement: Joi.string(),
-        cep: Joi.string().required()
+        cep: Joi.string().required(),
+        state: Joi.string().required()
       }),
       numberphone: Joi.string().required(),
-      cpf: Joi.string().required()
+      cpf: Joi.string().required(),
+      email: Joi.string().required(),
+      company_id: Joi.string()
     },
   }),
   isAuthenticate,
@@ -50,7 +53,8 @@ employeeRoute.put(
           cep: Joi.string()
         }),
         numberphone: Joi.string(),
-        cpf: Joi.string()
+        cpf: Joi.string(),
+        email: Joi.string()
     },
     [Segments.PARAMS]: {
       id: Joi.string().uuid().required(),

@@ -7,6 +7,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Company {
+  id                 String     @id @default(uuid())
+  name               String
+  adress             Json
+  cnpj               String     @unique
+  numberphone        String
+  phone              String
+  email              String     @unique
+  state_registration String
+  opening_date       DateTime   @db.Date
+  site               String
+  created_at         DateTime   @default(now())
+  updated_at         DateTime   @updatedAt
+  Employee           Employee[]
+}
+
 model Employee {
   id          String   @id @default(uuid())
   name        String
@@ -17,9 +33,12 @@ model Employee {
   address     Json
   numberphone String
   cpf         String   @unique
+  email       String   @unique
+  company_id  String
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
   User        User?
+  Company     Company  @relation(fields: [company_id], references: [id], onDelete: Cascade)
 }
 
 model User {
@@ -38,5 +57,5 @@ model Clock {
   clock_date DateTime @default(now()) @db.Date
   clock_time DateTime @default(now()) @db.Time()
   user_id    String
-  User       User     @relation(fields: [user_id], references: [id])
+  User       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }

@@ -36,16 +36,17 @@ export class LoginUserService{
             throw new AppError('Usuario ou senha incorretos', 401)
         }
 
-        const nivelEmployee = await  prisma.employee.findFirst({
+        const employeeData = await  prisma.employee.findFirst({
             where: {
                  id: user.employee_id
             },
             select: {
-                nivel: true
+                nivel: true,
+                company_id: true
             }
         })
 
-        const token = sign({nivel: nivelEmployee?.nivel}, authConfig.jwt.secret, {
+        const token = sign({nivel: employeeData?.nivel, company_id: employeeData?.company_id}, authConfig.jwt.secret, {
             subject: user.id,
             expiresIn: authConfig.jwt.expiresIn,
         });

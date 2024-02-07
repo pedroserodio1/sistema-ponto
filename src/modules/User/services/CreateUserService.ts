@@ -3,6 +3,7 @@ import {User} from '@prisma/client'
 import {hash} from 'bcryptjs'
 import { UserRepository } from "../repositories/UserRepository";
 import { AppError } from "@shared/AppError/AppError";
+import verifyNivel from "@shared/VerifyNivel/VerifyNivel";
 
 interface IRequest {
     username: string
@@ -11,7 +12,10 @@ interface IRequest {
 }
 
 export class CreateUserService {
-    public async execute(data: IRequest): Promise<User>{
+    public async execute(data: IRequest, nivelLogin: string): Promise<User>{
+
+        verifyNivel(nivelLogin, "3")
+
         const userRepository = new UserRepository()
 
 

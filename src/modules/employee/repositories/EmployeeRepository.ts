@@ -12,10 +12,11 @@ export class EmployeeRepository{
         return user
     }
 
-    public async findById(id: string): Promise<Employee | null> {
+    public async findById(id: string, company_id: string): Promise<Employee | null> {
         const user = await prisma.employee.findFirst({
             where: {
-                id
+                id,
+                company_id
             }
         })
 
